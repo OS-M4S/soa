@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_ApproveItem" structureRef="String" />
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn" name="Sample Process" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="Approve" itemSubjectRef="_ApproveItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <exclusiveGateway id="_2" name="Gateway" gatewayDirection="Diverging" />
+    <scriptTask id="_3" name="Hold and inform applicant" >
+      <script>System.out.println("Your application is on hold");</script>
+    </scriptTask>
+    <scriptTask id="_4" name="scan and save documents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_5" name="Add comments" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_6" name="Inform applicant" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("We are sorry but Your applicatioon is rejected.You can apply one more time");</script>
+    </scriptTask>
+    <scriptTask id="_7" name="send allotment letter" >
+      <script>System.out.println("Congratulation Your application has been approved you will recieve allotment letter soon");</script>
+    </scriptTask>
+    <exclusiveGateway id="_8" name="Gateway" gatewayDirection="Converging" />
+    <endEvent id="_9" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" name="hold" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return Approve=="HOLD";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_2-_4" sourceRef="_2" targetRef="_4" name="no" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return Approve=="NO";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_2-_5" sourceRef="_2" targetRef="_5" name="yes" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return Approve=="YES";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_4-_6" sourceRef="_4" targetRef="_6" />
+    <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7" />
+    <sequenceFlow id="_3-_8" sourceRef="_3" targetRef="_8" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_6-_8" sourceRef="_6" targetRef="_8" />
+    <sequenceFlow id="_8-_9" sourceRef="_8" targetRef="_9" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="279" y="15" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="286" y="103" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="16" y="178" width="173" height="67" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="216" y="178" width="169" height="63" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="426" y="178" width="173" height="67" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="216" y="276" width="169" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="432" y="276" width="157" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="282" y="414" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="276" y="504" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="303" y="38" />
+        <di:waypoint x="310" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="310" y="127" />
+        <di:waypoint x="102" y="211" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_4" >
+        <di:waypoint x="310" y="127" />
+        <di:waypoint x="300" y="209" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_5" >
+        <di:waypoint x="310" y="127" />
+        <di:waypoint x="512" y="211" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_6" >
+        <di:waypoint x="300" y="209" />
+        <di:waypoint x="300" y="306" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_7" >
+        <di:waypoint x="512" y="211" />
+        <di:waypoint x="510" y="303" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_8" >
+        <di:waypoint x="102" y="211" />
+        <di:waypoint x="101" y="434" />
+        <di:waypoint x="306" y="438" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="510" y="303" />
+        <di:waypoint x="511" y="433" />
+        <di:waypoint x="306" y="438" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_8" >
+        <di:waypoint x="300" y="306" />
+        <di:waypoint x="306" y="438" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_9" >
+        <di:waypoint x="306" y="438" />
+        <di:waypoint x="300" y="528" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

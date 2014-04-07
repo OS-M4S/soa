@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_eligibleItem" structureRef="Boolean" />
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn" name="Sample Process" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="eligible" itemSubjectRef="_eligibleItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="Open the application" >
+      <script></script>
+    </scriptTask>
+    <exclusiveGateway id="_3" name="eligibilty check" gatewayDirection="Diverging" />
+    <scriptTask id="_4" name="Scan &amp; Mark documents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_5" name="Scan &amp;Save Documents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_7" name="Reject &amp; Inform Applicant" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("your application is rejected you can apply one more time");</script>
+    </scriptTask>
+    <endEvent id="_8" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <exclusiveGateway id="_9" name="Gateway" gatewayDirection="Converging" />
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4" name="yes" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return eligible==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" name="no" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return eligible==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7" />
+    <sequenceFlow id="_9-_8" sourceRef="_9" targetRef="_8" />
+    <sequenceFlow id="_7-_9" sourceRef="_7" targetRef="_9" />
+    <sequenceFlow id="_4-_9" sourceRef="_4" targetRef="_9" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="183" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="126" y="96" width="163" height="63" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="183" y="191" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="24" y="272" width="170" height="53" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="240" y="272" width="153" height="53" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="240" y="372" width="167" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="204" y="564" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="204" y="492" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="207" y="40" />
+        <di:waypoint x="207" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="207" y="127" />
+        <di:waypoint x="207" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_4" >
+        <di:waypoint x="207" y="215" />
+        <di:waypoint x="109" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="207" y="215" />
+        <di:waypoint x="316" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_7" >
+        <di:waypoint x="316" y="298" />
+        <di:waypoint x="323" y="397" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9-_8" >
+        <di:waypoint x="228" y="516" />
+        <di:waypoint x="228" y="588" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_9" >
+        <di:waypoint x="323" y="397" />
+        <di:waypoint x="228" y="516" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_9" >
+        <di:waypoint x="109" y="298" />
+        <di:waypoint x="228" y="516" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

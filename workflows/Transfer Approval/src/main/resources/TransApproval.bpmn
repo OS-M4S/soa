@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_IsApprovedItem" structureRef="String" />
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn" name="Sample Process" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="IsApproved" itemSubjectRef="_IsApprovedItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="Select application for Approval" >
+      <script></script>
+    </scriptTask>
+    <exclusiveGateway id="_3" name="Gateway" gatewayDirection="Diverging" />
+    <scriptTask id="_4" name="Hold apllication and inform" >
+      <script>System.out.println("your license on hold");</script>
+    </scriptTask>
+    <scriptTask id="_5" name="Reject and inform" >
+      <script>System.out.println("we are sorry but your application is not approved for transfer");</script>
+    </scriptTask>
+    <scriptTask id="_6" name="Sign for approval" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_7" name="Inform Applicant " >
+      <script>System.out.println("Congratulation your license is approved for transfer");</script>
+    </scriptTask>
+    <exclusiveGateway id="_8" name="Gateway" gatewayDirection="Converging" />
+    <endEvent id="_9" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4" name="Hold" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="HOLD";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" name="Reject" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="NO"</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_6" sourceRef="_3" targetRef="_6" name="Accepted" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="YES"</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7" />
+    <sequenceFlow id="_5-_8" sourceRef="_5" targetRef="_8" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_4-_8" sourceRef="_4" targetRef="_8" />
+    <sequenceFlow id="_8-_9" sourceRef="_8" targetRef="_9" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="321" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="240" y="96" width="193" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="312" y="192" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="12" y="276" width="188" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="252" y="276" width="176" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="456" y="270" width="188" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="492" y="360" width="121" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="318" y="456" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="312" y="540" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="345" y="40" />
+        <di:waypoint x="336" y="126" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="336" y="126" />
+        <di:waypoint x="336" y="216" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_4" >
+        <di:waypoint x="336" y="216" />
+        <di:waypoint x="106" y="306" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="336" y="216" />
+        <di:waypoint x="340" y="306" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_6" >
+        <di:waypoint x="336" y="216" />
+        <di:waypoint x="550" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_7" >
+        <di:waypoint x="550" y="300" />
+        <di:waypoint x="552" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_8" >
+        <di:waypoint x="340" y="306" />
+        <di:waypoint x="342" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="552" y="390" />
+        <di:waypoint x="552" y="477" />
+        <di:waypoint x="342" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_8" >
+        <di:waypoint x="106" y="306" />
+        <di:waypoint x="107" y="481" />
+        <di:waypoint x="342" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_9" >
+        <di:waypoint x="342" y="480" />
+        <di:waypoint x="336" y="564" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

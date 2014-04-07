@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_IsTransferableItem" structureRef="Boolean" />
+  <itemDefinition id="_IsAvailableItem" structureRef="Boolean" />
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn" name="Sample Process" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="IsTransferable" itemSubjectRef="_IsTransferableItem"/>
+    <property id="IsAvailable" itemSubjectRef="_IsAvailableItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="Submit License" >
+      <script></script>
+    </scriptTask>
+    <exclusiveGateway id="_3" name="Is Transferable" gatewayDirection="Diverging" />
+    <scriptTask id="_4" name="Survey Department" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_5" name="Inform Applicant" >
+      <script>System.out.println("we are sorry but Your license is not extensionable");</script>
+    </scriptTask>
+    <exclusiveGateway id="_6" name="Gateway" gatewayDirection="Diverging" />
+    <exclusiveGateway id="_7" name="Gateway" gatewayDirection="Converging" />
+    <exclusiveGateway id="_8" name="Gateway" gatewayDirection="Converging" />
+    <endEvent id="_9" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <scriptTask id="_10" name="Approved" >
+      <script>System.out.println("Your extension is approved");</script>
+    </scriptTask>
+    <scriptTask id="_11" name="rejected" >
+      <script>System.out.println("we are sorry but Your license is not extensionable because area is not available");</script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4" name="yes" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return IsTransferable==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" name="no" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsTransferable==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_4-_6" sourceRef="_4" targetRef="_6" />
+    <sequenceFlow id="_5-_7" sourceRef="_5" targetRef="_7" />
+    <sequenceFlow id="_11-_7" sourceRef="_11" targetRef="_7" />
+    <sequenceFlow id="_10-_8" sourceRef="_10" targetRef="_8" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_8-_9" sourceRef="_8" targetRef="_9" />
+    <sequenceFlow id="_6-_10" sourceRef="_6" targetRef="_10" name="yes" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsAvailable==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6-_11" sourceRef="_6" targetRef="_11" name="no" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsAvailable==false;</conditionExpression>
+    </sequenceFlow>
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="158" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="128" y="96" width="108" height="53" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="158" y="181" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="16" y="262" width="157" height="66" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="216" y="264" width="131" height="66" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="72" y="360" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="264" y="360" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="168" y="540" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="168" y="624" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" >
+        <dc:Bounds x="36" y="468" width="116" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" >
+        <dc:Bounds x="144" y="360" width="97" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="182" y="40" />
+        <di:waypoint x="182" y="122" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="182" y="122" />
+        <di:waypoint x="182" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_4" >
+        <di:waypoint x="182" y="205" />
+        <di:waypoint x="94" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="182" y="205" />
+        <di:waypoint x="281" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_6" >
+        <di:waypoint x="94" y="295" />
+        <di:waypoint x="96" y="384" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_7" >
+        <di:waypoint x="281" y="297" />
+        <di:waypoint x="288" y="384" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_7" >
+        <di:waypoint x="192" y="384" />
+        <di:waypoint x="288" y="384" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10-_8" >
+        <di:waypoint x="94" y="492" />
+        <di:waypoint x="192" y="564" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="288" y="384" />
+        <di:waypoint x="192" y="564" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_9" >
+        <di:waypoint x="192" y="564" />
+        <di:waypoint x="192" y="648" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_10" >
+        <di:waypoint x="96" y="384" />
+        <di:waypoint x="94" y="492" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_11" >
+        <di:waypoint x="96" y="384" />
+        <di:waypoint x="192" y="384" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

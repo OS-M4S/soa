@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_IsCompleteItem" structureRef="Boolean" />
+  <itemDefinition id="_IsEligibleItem" structureRef="Boolean" />
+  <itemDefinition id="_IsAreaAvailableItem" structureRef="Boolean" />
+  <itemDefinition id="_MineralsAvailableItem" structureRef="Boolean" />
+  <itemDefinition id="_IsApprovedItem" structureRef="String" />
+
+  <process processType="Private" isExecutable="true" id="com.sample.bpmn" name="Sample Process" tns:packageName="defaultPackage" >
+
+    <!-- process variables -->
+    <property id="IsComplete" itemSubjectRef="_IsCompleteItem"/>
+    <property id="IsEligible" itemSubjectRef="_IsEligibleItem"/>
+    <property id="IsAreaAvailable" itemSubjectRef="_IsAreaAvailableItem"/>
+    <property id="MineralsAvailable" itemSubjectRef="_MineralsAvailableItem"/>
+    <property id="IsApproved" itemSubjectRef="_IsApprovedItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="Submit Documents" >
+      <script></script>
+    </scriptTask>
+    <exclusiveGateway id="_3" name="IsComplete" gatewayDirection="Diverging" />
+    <scriptTask id="_4" name="Reject and inform Applicant" >
+      <script>System.out.println("We are sorry but your application is rejected because your documents are not complete, but you can apply one more time.");</script>
+    </scriptTask>
+    <scriptTask id="_5" name="Application is registered" >
+      <script>System.out.println("Congratulation your application is registerd and your token number is 12345.");</script>
+    </scriptTask>
+    <exclusiveGateway id="_6" name="IsEligible" gatewayDirection="Diverging" />
+    <scriptTask id="_7" name="Scan  and Save Documnents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_8" name="Marking for Survey" >
+      <script>System.out.println("Your application is marked for the survey team.");</script>
+    </scriptTask>
+    <scriptTask id="_9" name="Reject and inform Applicant" >
+      <script>System.out.println("We are sorry but your application is rejected becuase you are not eligible,but you can apply one more time.");</script>
+    </scriptTask>
+    <exclusiveGateway id="_10" name="Gateway" gatewayDirection="Converging" />
+    <exclusiveGateway id="_11" name="IsAreaAvailable" gatewayDirection="Diverging" />
+    <scriptTask id="_13" name="Reject and inform Applicant" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("We are sorry but your application is rejected  beacuase area is not available,but you can apply one more time.");</script>
+    </scriptTask>
+    <scriptTask id="_14" name="Mark for Geosurvey" >
+      <script>System.out.println("Your application is marked for the geosurvey.");</script>
+    </scriptTask>
+    <scriptTask id="_19" name="Reject and inform Applicant" >
+      <script>System.out.println("We are sorry but your application is rejected because minerals are no available,but you can apply one more time.");</script>
+    </scriptTask>
+    <exclusiveGateway id="_18" name="Gateway" gatewayDirection="Diverging" />
+    <exclusiveGateway id="_21" name="Gateway" gatewayDirection="Diverging" />
+    <scriptTask id="_20" name="Mark for Mines Committee" >
+      <script>System.out.println("Your application is marked for the mines committee.");</script>
+    </scriptTask>
+    <scriptTask id="_23" name="send allotment letter" >
+      <script>System.out.println("Congratulation Your Applcation has been approved you will recieve allotment letter soon.");</script>
+    </scriptTask>
+    <scriptTask id="_22" name="Hold and check again for approval" >
+      <script>System.out.println("your application is on hold.");</script>
+    </scriptTask>
+    <scriptTask id="_24" name="Reject and inform Applicant" >
+      <script>System.out.println("We are sorry but your application is not approved, but you can apply one more time.");</script>
+    </scriptTask>
+    <endEvent id="_27" name="End" >
+        <terminateEventDefinition />
+    </endEvent>
+    <exclusiveGateway id="_26" name="Gateway" gatewayDirection="Converging" />
+    <scriptTask id="_29" name="Scan  and Save Documnents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_28" name="Scan  and Save Documnents" >
+      <script></script>
+    </scriptTask>
+    <scriptTask id="_30" name="Scan  and Save Documnents" >
+      <script></script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_3-_4" sourceRef="_3" targetRef="_4" name="docs incomplete" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsComplete==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_3-_5" sourceRef="_3" targetRef="_5" name="Docs Complete" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsComplete==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5-_6" sourceRef="_5" targetRef="_6" />
+    <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7" name="Not eligible" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsEligible==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6-_8" sourceRef="_6" targetRef="_8" name="eligible" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsEligible==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_7-_9" sourceRef="_7" targetRef="_9" />
+    <sequenceFlow id="_4-_10" sourceRef="_4" targetRef="_10" />
+    <sequenceFlow id="_9-_10" sourceRef="_9" targetRef="_10" />
+    <sequenceFlow id="_13-_10" sourceRef="_13" targetRef="_10" />
+    <sequenceFlow id="_19-_10" sourceRef="_19" targetRef="_10" />
+    <sequenceFlow id="_24-_10" sourceRef="_24" targetRef="_10" />
+    <sequenceFlow id="_8-_11" sourceRef="_8" targetRef="_11" />
+    <sequenceFlow id="_28-_13" sourceRef="_28" targetRef="_13" />
+    <sequenceFlow id="_11-_14" sourceRef="_11" targetRef="_14" name="area available" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsAreaAvailable==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_29-_19" sourceRef="_29" targetRef="_19" />
+    <sequenceFlow id="_14-_18" sourceRef="_14" targetRef="_18" />
+    <sequenceFlow id="_20-_21" sourceRef="_20" targetRef="_21" />
+    <sequenceFlow id="_18-_20" sourceRef="_18" targetRef="_20" name="Mineral Available" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return MineralsAvailable==true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_21-_23" sourceRef="_21" targetRef="_23" name="approved" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="YES";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_21-_22" sourceRef="_21" targetRef="_22" name="Hold" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="HOLD";</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_30-_24" sourceRef="_30" targetRef="_24" />
+    <sequenceFlow id="_26-_27" sourceRef="_26" targetRef="_27" />
+    <sequenceFlow id="_10-_26" sourceRef="_10" targetRef="_26" />
+    <sequenceFlow id="_23-_26" sourceRef="_23" targetRef="_26" />
+    <sequenceFlow id="_22-_26" sourceRef="_22" targetRef="_26" />
+    <sequenceFlow id="_18-_29" sourceRef="_18" targetRef="_29" name="No minerals" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return MineralsAvailable==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_11-_28" sourceRef="_11" targetRef="_28" name="No area" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsAreaAvailable==false;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_21-_30" sourceRef="_21" targetRef="_30" name="Not Approved" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return IsApproved=="NO";</conditionExpression>
+    </sequenceFlow>
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.sample.bpmn" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="606" y="0" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="552" y="60" width="146" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="606" y="144" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="300" y="144" width="181" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="768" y="144" width="145" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="606" y="238" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="312" y="240" width="181" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="768" y="240" width="145" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="96" y="240" width="193" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" >
+        <dc:Bounds x="0" y="336" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" >
+        <dc:Bounds x="606" y="336" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_13" >
+        <dc:Bounds x="96" y="336" width="193" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_14" >
+        <dc:Bounds x="768" y="336" width="145" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_19" >
+        <dc:Bounds x="96" y="432" width="193" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_18" >
+        <dc:Bounds x="600" y="432" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_21" >
+        <dc:Bounds x="612" y="534" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_20" >
+        <dc:Bounds x="768" y="432" width="169" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_23" >
+        <dc:Bounds x="540" y="636" width="193" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_22" >
+        <dc:Bounds x="840" y="528" width="229" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_24" >
+        <dc:Bounds x="96" y="528" width="193" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_27" >
+        <dc:Bounds x="612" y="792" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_26" >
+        <dc:Bounds x="612" y="708" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_29" >
+        <dc:Bounds x="312" y="432" width="181" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_28" >
+        <dc:Bounds x="312" y="336" width="181" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_30" >
+        <dc:Bounds x="312" y="528" width="181" height="49" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="630" y="24" />
+        <di:waypoint x="625" y="90" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="625" y="90" />
+        <di:waypoint x="630" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_4" >
+        <di:waypoint x="630" y="168" />
+        <di:waypoint x="390" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_5" >
+        <di:waypoint x="630" y="168" />
+        <di:waypoint x="840" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_6" >
+        <di:waypoint x="840" y="168" />
+        <di:waypoint x="853" y="190" />
+        <di:waypoint x="853" y="206" />
+        <di:waypoint x="853" y="218" />
+        <di:waypoint x="626" y="217" />
+        <di:waypoint x="630" y="261" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_7" >
+        <di:waypoint x="630" y="261" />
+        <di:waypoint x="402" y="264" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_8" >
+        <di:waypoint x="630" y="261" />
+        <di:waypoint x="840" y="264" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_9" >
+        <di:waypoint x="402" y="264" />
+        <di:waypoint x="192" y="264" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_10" >
+        <di:waypoint x="390" y="168" />
+        <di:waypoint x="226" y="168" />
+        <di:waypoint x="122" y="167" />
+        <di:waypoint x="26" y="166" />
+        <di:waypoint x="24" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9-_10" >
+        <di:waypoint x="192" y="264" />
+        <di:waypoint x="24" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_13-_10" >
+        <di:waypoint x="192" y="360" />
+        <di:waypoint x="24" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_19-_10" >
+        <di:waypoint x="192" y="456" />
+        <di:waypoint x="24" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_24-_10" >
+        <di:waypoint x="192" y="552" />
+        <di:waypoint x="54" y="477" />
+        <di:waypoint x="24" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_11" >
+        <di:waypoint x="840" y="264" />
+        <di:waypoint x="863" y="287" />
+        <di:waypoint x="864" y="298" />
+        <di:waypoint x="864" y="311" />
+        <di:waypoint x="622" y="311" />
+        <di:waypoint x="630" y="359" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_28-_13" >
+        <di:waypoint x="402" y="360" />
+        <di:waypoint x="192" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_14" >
+        <di:waypoint x="630" y="359" />
+        <di:waypoint x="840" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_29-_19" >
+        <di:waypoint x="402" y="456" />
+        <di:waypoint x="192" y="456" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_14-_18" >
+        <di:waypoint x="840" y="360" />
+        <di:waypoint x="842" y="409" />
+        <di:waypoint x="623" y="408" />
+        <di:waypoint x="624" y="456" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_20-_21" >
+        <di:waypoint x="852" y="456" />
+        <di:waypoint x="853" y="506" />
+        <di:waypoint x="748" y="505" />
+        <di:waypoint x="636" y="504" />
+        <di:waypoint x="636" y="558" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_18-_20" >
+        <di:waypoint x="624" y="456" />
+        <di:waypoint x="852" y="456" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_21-_23" >
+        <di:waypoint x="636" y="558" />
+        <di:waypoint x="636" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_21-_22" >
+        <di:waypoint x="636" y="558" />
+        <di:waypoint x="954" y="552" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_30-_24" >
+        <di:waypoint x="402" y="552" />
+        <di:waypoint x="192" y="552" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_26-_27" >
+        <di:waypoint x="636" y="732" />
+        <di:waypoint x="636" y="816" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10-_26" >
+        <di:waypoint x="24" y="360" />
+        <di:waypoint x="25" y="735" />
+        <di:waypoint x="636" y="732" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_23-_26" >
+        <di:waypoint x="636" y="660" />
+        <di:waypoint x="636" y="732" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_22-_26" >
+        <di:waypoint x="954" y="552" />
+        <di:waypoint x="952" y="734" />
+        <di:waypoint x="636" y="732" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_18-_29" >
+        <di:waypoint x="624" y="456" />
+        <di:waypoint x="402" y="456" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_28" >
+        <di:waypoint x="630" y="359" />
+        <di:waypoint x="402" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_21-_30" >
+        <di:waypoint x="636" y="558" />
+        <di:waypoint x="402" y="552" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

@@ -23,11 +23,11 @@ public class ProcessTest {
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("IsComplete",true);
+		params.put("IsComplete",false);
 		params.put("IsEligible",true);
 		params.put("IsAreaAvailable",true);
 		params.put("MineralsAvailable",true);
-		params.put("IsApproved","NO");
+		params.put("IsApproved","HOLD");
 		ksession.startProcess("com.sample.bpmn", params);
 		
 		// start a new process instance

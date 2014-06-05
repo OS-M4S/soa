@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="10" version="2.0">
+<workbench progressCount="15" version="2.0">
 <workbenchAdvisor/>
 <window height="811" maximized="true" minimized="true" width="1024" x="557" y="548">
 <fastViewData fastViewLocation="1024"/>
@@ -15,13 +15,13 @@
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="99" y="22"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xsd.ui.internal.editor.InternalXSDMultiPageEditor" itemType="typePlaceholder" x="104" y="22"/>
-<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.drools.eclipse.flow.ruleflow.editor.RuleFlowModelEditor" itemType="typePlaceholder" x="333" y="30"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -41,12 +41,11 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessTest.java" partName="ProcessTest.java" path="C:/Users/yahya/GOV_HOME/jbpm-5.4.0.Final-installer-full/jbpm-installer/workspace/Cadastre/src/main/java/com/test/ProcessTest.java" title="ProcessTest.java" tooltip="Cadastre/src/main/java/com/test/ProcessTest.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Cadastre/src/main/java/com/test/ProcessTest.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="341" selectionTopPixel="0"/>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="edittransfer.bpmn" partName="edittransfer.bpmn" path="C:/Users/yahya/GOV_HOME/jbpm-5.4.0.Final-installer-full/jbpm-installer/workspace/transferedit/src/main/resources/edittransfer.bpmn" title="edittransfer.bpmn" tooltip="transferedit/src/main/resources/edittransfer.bpmn" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/transferedit/src/main/resources/edittransfer.bpmn"/>
 </editor>
-<editor activePart="true" focus="true" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="cadastre.bpmn" partName="cadastre.bpmn" path="C:/Users/yahya/GOV_HOME/jbpm-5.4.0.Final-installer-full/jbpm-installer/workspace/Cadastre/src/main/resources/cadastre.bpmn" title="cadastre.bpmn" tooltip="Cadastre/src/main/resources/cadastre.bpmn" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Cadastre/src/main/resources/cadastre.bpmn"/>
+<editor activePart="true" focus="true" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="edittransfer.bpmn" partName="edittransfer.bpmn" path="C:/Users/yahya/GOV_HOME/jbpm-5.4.0.Final-installer-full/jbpm-installer/workspace/transferedit/src/main/resources/edittransfer.bpmn" title="edittransfer.bpmn" tooltip="transferedit/src/main/resources/edittransfer.bpmn" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/transferedit/src/main/resources/edittransfer.bpmn"/>
 </editor>
 </editors>
 <views>
@@ -139,7 +138,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.jbpm.eclipse.JBPMPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.jbpm.eclipse.JBPMPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
@@ -287,14 +286,14 @@
 <new_wizard_action id="org.eclipse.ui.editors.wizards.UntitledTextFileWizard"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.ui.views.ResourceNavigator"/>
 <view id="org.eclipse.ui.views.PropertySheet"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.jbpm.eclipse.task.views.TaskView"/>
 <view id="org.drools.eclipse.debug.AuditView"/>
 <view id="org.guvnor.tools.views.RepositoryView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
-<view id="org.eclipse.ui.views.ResourceNavigator"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -334,8 +333,8 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1b7a359" ratio="0.6416309" ratioLeft="598" ratioRight="334" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1ee3cbf" ratio="0.87229437" ratioLeft="806" ratioRight="118" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.PropertySheet" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.jbpm.eclipse.task.views.TaskView" label="Human Task View"/>
@@ -443,6 +442,14 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Cadastre/src/main/java/com/test/ProcessTest.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" path="/Cadastre/src/main/resources/cadastre.bpmn"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Cadastre/src/main/java/com/test/ProcessTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/optcadastre/src/main/java/com/test/ProcessTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/optcadastre/src/main/java/com/test/ProcessTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Cadastre/src/main/java/com/test/ProcessTest.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/Renewable/src/main/resources/renewable.bpmn"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/Conversion/src/main/resources/convert.bpmn"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" path="/Cadastre/src/main/resources/cadastre.bpmn"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/transferedit/src/main/resources/edittransfer.bpmn"/>
 </editors>
 <item historyLabel="ProcessTest.java" index="0">
 <position info="not_deleted" x="0" y="0"/>
@@ -451,7 +458,45 @@
 <item historyLabel="ProcessTest.java" index="0">
 <position info="not_deleted" x="341" y="0"/>
 </item>
-<item active="true" historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="2">
+<position info="not_deleted" x="897" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="2">
+<position info="not_deleted" x="897" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="2">
+<position info="not_deleted" x="897" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="3">
+<position info="not_deleted" x="897" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="4">
+<position info="not_deleted" x="21" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="5">
+<position info="not_deleted" x="897" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="ProcessTest.java" index="4">
+<position info="not_deleted" x="21" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="1"/>
+<item historyLabel="renewable.bpmn" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="convert.bpmn" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="cadastre.bpmn" index="8"/>
+<item active="true" historyLabel="edittransfer.bpmn" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -469,6 +514,39 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="edittransfer-image.png" tooltip="transferedit/src/main/resources/edittransfer-image.png">
+<persistable path="/transferedit/src/main/resources/edittransfer-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="edittransferr-image.png" tooltip="transferedit/src/main/resources/edittransferr-image.png">
+<persistable path="/transferedit/src/main/resources/edittransferr-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="Transfer-image.png" tooltip="Transfer Application/src/main/resources/Transfer-image.png">
+<persistable path="/Transfer Application/src/main/resources/Transfer-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="translicense-image.png" tooltip="Transfer/src/main/resources/translicense-image.png">
+<persistable path="/Transfer/src/main/resources/translicense-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="TransApproval-image.png" tooltip="Transfer Approval/src/main/resources/TransApproval-image.png">
+<persistable path="/Transfer Approval/src/main/resources/TransApproval-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="edittransfer.bpmn" tooltip="transferedit/src/main/resources/edittransfer.bpmn">
+<persistable path="/transferedit/src/main/resources/edittransfer.bpmn"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="convert-image.png" tooltip="Conversion/src/main/resources/convert-image.png">
+<persistable path="/Conversion/src/main/resources/convert-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="convert.bpmn" tooltip="Conversion/src/main/resources/convert.bpmn">
+<persistable path="/Conversion/src/main/resources/convert.bpmn"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="renewable-image.png" tooltip="Renewable/src/main/resources/renewable-image.png">
+<persistable path="/Renewable/src/main/resources/renewable-image.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="renewable.bpmn" tooltip="Renewable/src/main/resources/renewable.bpmn">
+<persistable path="/Renewable/src/main/resources/renewable.bpmn"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessTest.java" tooltip="optcadastre/src/main/java/com/test/ProcessTest.java">
+<persistable path="/optcadastre/src/main/java/com/test/ProcessTest.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="cadastre.bpmn" tooltip="Cadastre/src/main/resources/cadastre.bpmn">
 <persistable path="/Cadastre/src/main/resources/cadastre.bpmn"/>
 </file>
@@ -480,39 +558,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="Geosue.bpmn" tooltip="GeoSurvey/src/main/resources/Geosue.bpmn">
 <persistable path="/GeoSurvey/src/main/resources/Geosue.bpmn"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="translicense.bpmn" tooltip="Transfer/src/main/resources/translicense.bpmn">
-<persistable path="/Transfer/src/main/resources/translicense.bpmn"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="cadastre.bpmn" tooltip="optcadastre/src/main/resources/cadastre.bpmn">
-<persistable path="/optcadastre/src/main/resources/cadastre.bpmn"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="applicationapp.bpmn" tooltip="Application Approval/src/main/resources/applicationapp.bpmn">
-<persistable path="/Application Approval/src/main/resources/applicationapp.bpmn"/>
-</file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="NodeInstanceImpl.class" tooltip="org.jbpm.workflow.instance.impl.NodeInstanceImpl">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Application Approval/C:\/Users\/yahya\/GOV_HOME\/jbpm-5.4.0.Final-installer-full\/jbpm-installer\/runtime\/jbpm-flow-5.4.0.Final.jar&lt;org.jbpm.workflow.instance.impl(NodeInstanceImpl.class"/>
-</file>
-<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="KnowledgeBuilderImpl.class" tooltip="org.drools.builder.impl.KnowledgeBuilderImpl">
-<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Application Approval/C:\/Users\/yahya\/GOV_HOME\/jbpm-5.4.0.Final-installer-full\/jbpm-installer\/runtime\/lib\/drools-compiler-5.5.0.Final.jar&lt;org.drools.builder.impl(KnowledgeBuilderImpl.class"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessTest.java" tooltip="NewApplApp/src/main/java/com/test/ProcessTest.java">
-<persistable path="/NewApplApp/src/main/java/com/test/ProcessTest.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.drools.eclipse.flow.bpmn2.editor.BPMNModelEditor" name="new.bpmn" tooltip="NewApplApp/src/main/resources/new.bpmn">
-<persistable path="/NewApplApp/src/main/resources/new.bpmn"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessTest.java" tooltip="GeoSurvey/src/main/java/com/test/ProcessTest.java">
-<persistable path="/GeoSurvey/src/main/java/com/test/ProcessTest.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ProcessTest.java" tooltip="optcadastre/src/main/java/com/test/ProcessTest.java">
-<persistable path="/optcadastre/src/main/java/com/test/ProcessTest.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="TransApproval-image.png" tooltip="Transfer Approval/src/main/resources/TransApproval-image.png">
-<persistable path="/Transfer Approval/src/main/resources/TransApproval-image.png"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="Transfer-image.png" tooltip="Transfer Application/src/main/resources/Transfer-image.png">
-<persistable path="/Transfer Application/src/main/resources/Transfer-image.png"/>
 </file>
 </mruList>
 </workbench>
